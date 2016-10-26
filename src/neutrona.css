@@ -1,0 +1,145 @@
+#ghostbuster-main {
+	position: absolute;
+    /*width: 350px;*/
+	width:0px;
+    height: 100%;
+    /*right: -350px;*/
+	right: 0;
+    top: 0;
+    display: block;
+    z-index: 9999;
+    background-color: rgba(255,255,255, 0.85);
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2);
+	-webkit-transition: width .5s ease-in-out;
+}
+
+.ghostbuster-wrap {
+	height: 100%;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	-webkit-transition: width .5s ease-in-out;
+	width: 0px;
+	overflow: hidden;
+}
+
+#ghostbuster-main.active, #ghostbuster-main.active .ghostbuster-wrap {
+    /*right: 0;*/
+	width:350px;
+}
+
+.ghostbuster-contents {
+	width: 300px;
+	margin: 2em;
+	text-align: justify;
+}
+
+.ghostbuster-contents .scenario {
+	cursor: pointer;
+	font-size: 1vw;
+	font-weight: 500;
+	color: #666;
+	text-align: center;
+}
+
+.ghostbuster-contents .scenario:hover {
+	color: #333;
+}
+
+.ghostbuster-contents .scenario i {
+	font-size: 65%;
+    margin-left: -19px;
+    position: absolute;
+    opacity: 0;
+    margin-top: 4px;
+	-webkit-transition: all .5s ease-out;
+}
+.ghostbuster-contents .scenario:hover i {
+    opacity: 0.25;
+}
+
+.ghostbuster-contents .steps {
+	margin: 2em;
+}
+
+.ghostbuster-contents .step {
+	cursor: pointer;
+	color: #333;
+}
+
+.ghostbuster-contents .step:hover {
+	background-color: #efefef;
+}
+
+.ghostbuster-contents .step.active {
+	color: #d00;
+}
+.ghostbuster-contents .step.completed {
+	color: #aaa;
+}
+
+.ghostbuster-contents .step i {
+	margin-left: -28px;
+	position: absolute;
+	margin-top: 4px;
+	opacity: 0;
+	-webkit-transition: all .5s ease-out;
+}
+.ghostbuster-contents .step i:hover, .ghostbuster-contents .step:hover i {
+	opacity: 0.25;
+}
+
+#ghostbuster-tab {
+	margin-top: 40px;
+	margin-left: -20px;
+}
+
+#ghostbuster-cursor {
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 10000;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+#ghostbuster-cursor.animated {
+	-webkit-transition:
+		all 1s cubic-bezier(0.445, 0.050, 0.550, 0.950),
+		opacity 0.333s ease-in-out
+	;
+}
+
+#ghostbuster-cursor.active {
+	opacity: 1;
+}
+
+#ghostbuster-cursor .click-indicator {
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	border-radius: 10px;
+	-webkit-transition: all 0.2s ease-out;
+	opacity: 0;
+	left: -4px;
+    top: -8px;
+    position: absolute;
+	-webkit-filter: blur(1px);
+}
+
+#ghostbuster-cursor.clicking .click-indicator {
+	opacity: 1;
+}
+
+#ghostbuster-cursor svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#ghostbuster-cursor .dropshadow {
+	-webkit-filter: blur(1px) grayscale(1);
+    opacity: 0.2;
+    top: 7px;
+    left: -8px;
+}

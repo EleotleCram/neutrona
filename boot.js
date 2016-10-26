@@ -1,3 +1,3 @@
 const Neutrona = require("./index.js");
 
-Neutrona.runScenario();
+window.Neutrona = Neutrona;
