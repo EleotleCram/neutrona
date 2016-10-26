@@ -48,7 +48,9 @@ const Runner = {
 				Promise.resolve()
 			))
 			.then(trigger('scenarioExecuted', [scenario]))
+			.then(run(() => {console.log("Scenario completed successfully:", scenario.description);}))
 			.catch((reason) => {
+				console.log("Scenario failed:", scenario.description);
 				Promise.resolve().then(trigger('scenarioFailed', [scenario, reason]));
 			})
 		;
