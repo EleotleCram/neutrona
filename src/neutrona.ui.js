@@ -114,15 +114,3 @@ Bus.on('stepExecuted', (_, step) => {
 		.addClass('completed')
 	;
 });
-
-// Audio stuff
-window.responsiveVoice = {speak(text, voice, options){$.isFunction(options.onend) && options.onend();}};
-// $('body').append("<script src='https://code.responsivevoice.org/responsivevoice.js'></script>");
-// Neutrona.Bus.on('executingScenario', (_, scenario, promise) => {
-// 	promise.then(say("How to " + scenario.description));
-// 	// responsiveVoice.speak(scenario.description);
-// });
-// Neutrona.Bus.on('executingStep', (_, step, promise) => {
-// 	promise.then(say(step.description));
-// 	// responsiveVoice.speak(step.description);
-// });

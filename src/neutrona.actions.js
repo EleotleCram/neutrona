@@ -72,17 +72,6 @@ const type = (text) => (elQ) => {
 	return new Promise(typeAsynchronously);
 };
 
-const say = (text) => (elQ) => {
-	const sayAsynchronously = (onDone, onError) => {
-		// responsiveVoice.speak(text, "UK English Female", {onend: onDone, onerror: onError});
-		console.log("responsiveVoice is disabled for now, so not saying:", text);
-		// @TODO remove onDone when re-enabling responsiveVoice.speak again:
-		onDone();
-	};
-
-	return new Promise(sayAsynchronously);
-}
-
 const pause = (sec) => (elQ) => {
 	const pauseAsynchronously = (onDone) => {
 		window.setTimeout(() => onDone(elQ), sec * 1000);
@@ -112,7 +101,6 @@ const getClickPosition = (elQ) => {
 };
 
 const Actions = {
-	say,
 	run,
 	trigger,
 	move,
