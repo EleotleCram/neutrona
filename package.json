@@ -4,7 +4,8 @@
   "description": "End-to-end, browser-based, integration test framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify": "mkdir -p target; browserify boot.js > target/neutrona-bundle.js"
   },
   "keywords": [
     "testing",
@@ -16,5 +17,8 @@
     "automation"
   ],
   "author": "Marcel Toele",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.1.1"
+  }
 }
