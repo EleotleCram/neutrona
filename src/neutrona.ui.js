@@ -2,10 +2,10 @@ const $ = require('./../lib/jquery.js');
 const Bus = require('./neutrona.bus.js');
 const Runner = require('./neutrona.runner.js');
 
-const initializeGhostBusterPanel = function() {
+const initializeNeutronaPanel = function() {
 	$('body').append(`
-		<div id="ghostbuster-main">
-			<svg id="ghostbuster-tab" width="20px" height="100px" viewBox="-1 0 6 25">
+		<div id="neutrona-main">
+			<svg id="neutrona-tab" width="20px" height="100px" viewBox="-1 0 6 25">
 				<defs id="defs4">
 				   <filter
 					   style="color-interpolation-filters:sRGB"
@@ -30,8 +30,8 @@ const initializeGhostBusterPanel = function() {
 					d="m 4.9999999,0 c -1,1 -3,2 -3.9999999,3 C 0,4 0,5 0,5 l 0,15.0598 c 0,0 0,0.9402 0.981235,1.9538 0.861422,0.8898 3.0187649,1.9864 3.9742589,2.9517 z"
 				/>
 			</svg>
-			<div class="ghostbuster-wrap">
-				<div class="ghostbuster-contents">
+			<div class="neutrona-wrap">
+				<div class="neutrona-contents">
 					<h1 class="scenario"></h1>
 					<ol class="steps"></ol>
 				</div>
@@ -40,7 +40,7 @@ const initializeGhostBusterPanel = function() {
 	`);
 
 	$('body').append(`
-		<div id="ghostbuster-cursor">
+		<div id="neutrona-cursor">
 			<div class="click-indicator"></div>
 			<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" class="dropshadow">
 				<path
@@ -62,27 +62,27 @@ const initializeGhostBusterPanel = function() {
 	`);
 
 	const {location} = window;
-	if(location.hash.toLowerCase().replace(/#/g, "") === "neutrona") {$('#ghostbuster-main').toggleClass('active');}
-	$('#ghostbuster-tab').click(() => $('#ghostbuster-main').toggleClass('active'));
+	if(location.hash.toLowerCase().replace(/#/g, "") === "neutrona") {$('#neutrona-main').toggleClass('active');}
+	$('#neutrona-tab').click(() => $('#neutrona-main').toggleClass('active'));
 };
 
-initializeGhostBusterPanel();
+initializeNeutronaPanel();
 
 const addStep = function(step) {
 	const listItemElQ = $(`<li id="${step.id}" title="Execute until and including this step" class="step">${step.description}</li>`);
 	const playButtonElQ = $('<i class="icon-play4"></i>');
 	listItemElQ.prepend(playButtonElQ);
 
-	$('.ghostbuster-contents .steps').append(listItemElQ);
+	$('.neutrona-contents .steps').append(listItemElQ);
 };
 
 const addScenario = (scenario) => {
-	$('.ghostbuster-contents .scenario')
+	$('.neutrona-contents .scenario')
 		.text(scenario.description)
 		.prepend('<i class="icon-play4"></i>')
 		.attr('title', "Execute all steps in the scenario")
 		.on('click', () => Runner.runScenario(scenario, 0.2))
-		// .on('click', () => GhostBuster.runScenario(scenario, 2))
+		// .on('click', () => Neutrona.runScenario(scenario, 2))
 		// .on('click', () => {AWF.Bus.resetAWF();$('.step').click()})
 		// .on('click', () => {$('.step').click()})
 	;
@@ -92,11 +92,11 @@ const addScenario = (scenario) => {
 };
 
 Bus.on('scenariosChanged', (_, scenarios) => addScenario(scenarios[0]));
-Bus.on('executingScenario', () => $('#ghostbuster-cursor').addClass('active'));
-Bus.on('scenarioExecuted', () => $('#ghostbuster-cursor').removeClass('active'));
+Bus.on('executingScenario', () => $('#neutrona-cursor').addClass('active'));
+Bus.on('scenarioExecuted', () => $('#neutrona-cursor').removeClass('active'));
 Bus.on('click', () => {
-	$('#ghostbuster-cursor').addClass('clicking');
-	window.setTimeout(() => $('#ghostbuster-cursor').removeClass('clicking'), 250);
+	$('#neutrona-cursor').addClass('clicking');
+	window.setTimeout(() => $('#neutrona-cursor').removeClass('clicking'), 250);
 });
 Bus.on('executingScenario', (_, scenario) => {
 	scenario.steps.forEach((step) => {
@@ -118,11 +118,11 @@ Bus.on('stepExecuted', (_, step) => {
 // Audio stuff
 window.responsiveVoice = {speak(text, voice, options){$.isFunction(options.onend) && options.onend();}};
 // $('body').append("<script src='https://code.responsivevoice.org/responsivevoice.js'></script>");
-// GhostBuster.Bus.on('executingScenario', (_, scenario, promise) => {
+// Neutrona.Bus.on('executingScenario', (_, scenario, promise) => {
 // 	promise.then(say("How to " + scenario.description));
 // 	// responsiveVoice.speak(scenario.description);
 // });
-// GhostBuster.Bus.on('executingStep', (_, step, promise) => {
+// Neutrona.Bus.on('executingStep', (_, step, promise) => {
 // 	promise.then(say(step.description));
 // 	// responsiveVoice.speak(step.description);
 // });

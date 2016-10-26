@@ -38,7 +38,7 @@ const click = () => (elQ) => {
 const move = () => (elQ) => {
 	let result = Promise.resolve(elQ);
 
-	$('#ghostbuster-cursor')
+	$('#neutrona-cursor')
 		.toggleClass('animated', Actions.move.animated)
 		.css(getClickPosition(elQ))
 	;
@@ -84,7 +84,6 @@ const say = (text) => (elQ) => {
 }
 
 const pause = (sec) => (elQ) => {
-	console.log("pausing!", sec);
 	const pauseAsynchronously = (onDone) => {
 		window.setTimeout(() => onDone(elQ), sec * 1000);
 	};

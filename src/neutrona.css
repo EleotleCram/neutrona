@@ -1,4 +1,4 @@
-#ghostbuster-main {
+#neutrona-main {
 	position: absolute;
     /*width: 350px;*/
 	width:0px;
@@ -13,7 +13,7 @@
 	-webkit-transition: width .5s ease-in-out;
 }
 
-.ghostbuster-wrap {
+.neutrona-wrap {
 	height: 100%;
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
@@ -22,18 +22,18 @@
 	overflow: hidden;
 }
 
-#ghostbuster-main.active, #ghostbuster-main.active .ghostbuster-wrap {
+#neutrona-main.active, #neutrona-main.active .neutrona-wrap {
     /*right: 0;*/
 	width:350px;
 }
 
-.ghostbuster-contents {
+.neutrona-contents {
 	width: 300px;
 	margin: 2em;
 	text-align: justify;
 }
 
-.ghostbuster-contents .scenario {
+.neutrona-contents .scenario {
 	cursor: pointer;
 	font-size: 1vw;
 	font-weight: 500;
@@ -41,11 +41,11 @@
 	text-align: center;
 }
 
-.ghostbuster-contents .scenario:hover {
+.neutrona-contents .scenario:hover {
 	color: #333;
 }
 
-.ghostbuster-contents .scenario i {
+.neutrona-contents .scenario i {
 	font-size: 65%;
     margin-left: -19px;
     position: absolute;
@@ -53,47 +53,47 @@
     margin-top: 4px;
 	-webkit-transition: all .5s ease-out;
 }
-.ghostbuster-contents .scenario:hover i {
+.neutrona-contents .scenario:hover i {
     opacity: 0.25;
 }
 
-.ghostbuster-contents .steps {
+.neutrona-contents .steps {
 	margin: 2em;
 }
 
-.ghostbuster-contents .step {
+.neutrona-contents .step {
 	cursor: pointer;
 	color: #333;
 }
 
-.ghostbuster-contents .step:hover {
+.neutrona-contents .step:hover {
 	background-color: #efefef;
 }
 
-.ghostbuster-contents .step.active {
+.neutrona-contents .step.active {
 	color: #d00;
 }
-.ghostbuster-contents .step.completed {
+.neutrona-contents .step.completed {
 	color: #aaa;
 }
 
-.ghostbuster-contents .step i {
+.neutrona-contents .step i {
 	margin-left: -28px;
 	position: absolute;
 	margin-top: 4px;
 	opacity: 0;
 	-webkit-transition: all .5s ease-out;
 }
-.ghostbuster-contents .step i:hover, .ghostbuster-contents .step:hover i {
+.neutrona-contents .step i:hover, .neutrona-contents .step:hover i {
 	opacity: 0.25;
 }
 
-#ghostbuster-tab {
+#neutrona-tab {
 	margin-top: 40px;
 	margin-left: -20px;
 }
 
-#ghostbuster-cursor {
+#neutrona-cursor {
 	display: block;
 	opacity: 0;
 	pointer-events: none;
@@ -103,18 +103,18 @@
 	left: 100px;
 }
 
-#ghostbuster-cursor.animated {
+#neutrona-cursor.animated {
 	-webkit-transition:
 		all 1s cubic-bezier(0.445, 0.050, 0.550, 0.950),
 		opacity 0.333s ease-in-out
 	;
 }
 
-#ghostbuster-cursor.active {
+#neutrona-cursor.active {
 	opacity: 1;
 }
 
-#ghostbuster-cursor .click-indicator {
+#neutrona-cursor .click-indicator {
 	width: 20px;
 	height: 20px;
 	background-color: red;
@@ -127,17 +127,17 @@
 	-webkit-filter: blur(1px);
 }
 
-#ghostbuster-cursor.clicking .click-indicator {
+#neutrona-cursor.clicking .click-indicator {
 	opacity: 1;
 }
 
-#ghostbuster-cursor svg {
+#neutrona-cursor svg {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
 
-#ghostbuster-cursor .dropshadow {
+#neutrona-cursor .dropshadow {
 	-webkit-filter: blur(1px) grayscale(1);
     opacity: 0.2;
     top: 7px;
