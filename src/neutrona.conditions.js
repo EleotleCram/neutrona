@@ -10,7 +10,6 @@ const awaitCondition = (description, checkCondition, selector) => {
 				const result = $(selector);
 
 				if(checkCondition(result)) {
-					console.log("resolving to", result);
 					resolve(result);
 				} else if((Date.now() - t0) < MAX_TIMEOUT) {
 					window.setTimeout(tryToResolve, 200);

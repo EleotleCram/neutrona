@@ -74,7 +74,6 @@ const addStep = function(step) {
 	listItemElQ.prepend(playButtonElQ);
 
 	$('.ghostbuster-contents .steps').append(listItemElQ);
-	//listItemElQ.on('click', cb);
 };
 
 const addScenario = (scenario) => {
@@ -92,10 +91,6 @@ const addScenario = (scenario) => {
 	scenario.steps.forEach(addStep);
 };
 
-// namespace("GhostBuster.UI", {
-// 	addScenario,
-// });
-
 Bus.on('scenariosChanged', (_, scenarios) => addScenario(scenarios[0]));
 Bus.on('executingScenario', () => $('#ghostbuster-cursor').addClass('active'));
 Bus.on('scenarioExecuted', () => $('#ghostbuster-cursor').removeClass('active'));
@@ -104,7 +99,6 @@ Bus.on('click', () => {
 	window.setTimeout(() => $('#ghostbuster-cursor').removeClass('clicking'), 250);
 });
 Bus.on('executingScenario', (_, scenario) => {
-	console.log('scenar', scenario);
 	scenario.steps.forEach((step) => {
 		$(`#${step.id}`).removeClass('completed');
 	});
@@ -115,7 +109,6 @@ Bus.on('executingStep', (_, step) => {
 	;
 });
 Bus.on('stepExecuted', (_, step) => {
-	console.log('stepExecuted', step);
 	$(`#${step.id}`)
 		.removeClass('active')
 		.addClass('completed')

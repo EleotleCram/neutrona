@@ -29,10 +29,9 @@ const Runner = {
 			.then(trigger('executingScenario', [scenario]))
 			.then(() => scenario.steps.reduce(
 				(promisedActions, nextStep) => {
-					console.log("23t23t23t");
 					return promisedActions
 						.then(() => Promise.resolve()
-							// .then(trigger('executingStep', [nextStep]))
+							.then(trigger('executingStep', [nextStep]))
 							// This needs to go to a logging component inside a then:
 							.then(run(() => console.log("Running step", nextStep.description)))
 							.then(nextStep.action)
