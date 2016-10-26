@@ -1,0 +1,20 @@
+{
+  "name": "neutrona",
+  "version": "0.1.0",
+  "description": "End-to-end, browser-based, integration test framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "testing",
+    "integration",
+    "testing",
+    "browser",
+    "end-to-end",
+    "test",
+    "automation"
+  ],
+  "author": "Marcel Toele",
+  "license": "ISC"
+}
