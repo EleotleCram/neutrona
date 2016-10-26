@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify": "mkdir -p target; browserify boot.js > target/neutrona-bundle.js"
+    "browserify": "mkdir -p target; browserify boot.js > target/neutrona-bundle.js",
+    "watchify": "mkdir -p target; watchify --debug boot.js -v -o target/neutrona-bundle.js"
   },
   "keywords": [
     "testing",
@@ -19,6 +20,7 @@
   "author": "Marcel Toele",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^13.1.1"
+    "browserify": "^13.1.1",
+    "watchify": "^3.7.0"
   }
 }
