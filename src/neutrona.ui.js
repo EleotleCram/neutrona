@@ -32,8 +32,14 @@ const initializeNeutronaPanel = function() {
 			</svg>
 			<div class="neutrona-wrap">
 				<div class="neutrona-contents">
-					<h1 class="scenario"></h1>
+					<h1 class="scenario title"></h1>
 					<ol class="steps"></ol>
+				</div>
+				<div class="neutrona-search">
+					<datalist id="neutrona-scenarios">
+					</datalist>
+					<h1 class="title">Available scenarios</h1>
+					<input type="text" list="neutrona-scenarios" placeholder="Search scenario...">
 				</div>
 			</div>
 		</div>
@@ -96,18 +102,37 @@ const setScenario = (scenario) => {
 	scenario.steps.forEach(addStep);
 };
 
-const descriptionOfScenarioToRun = $.uriParams('name');
-if(descriptionOfScenarioToRun) {
-	let allScenarios = [];
-	Bus.on('scenariosChanged', (_, scenarios) => {
-		allScenarios = scenarios;
+const descriptionOfSelectedScenario = $.uriParams('name');
+let allScenarios = [];
+Bus.on('scenariosChanged', (_, scenarios) => {
+	allScenarios = scenarios;
+});
+
+const trySelectScenarioByDescription = (scenarioDescription) => {
+	let successful = false;
+	const scenario = allScenarios.find((scenario) => scenario.description === scenarioDescription);
+
+	if(scenario) {
+		setScenario(scenario);
+		successful = true;
+	}
+
+	return successful;
+};
+$(window).ready(() => {
+	allScenarios.forEach((scenario) => {
+		$('#neutrona-scenarios').append(`<option value="${scenario.description}">`);
 	});
 
-	$(window).ready(() => {
-		const scenario = allScenarios.find((scenario) => scenario.description === descriptionOfScenarioToRun);
-		setScenario(scenario);
+	$('.neutrona-search input').on('change', (event) => {
+		const scenarioDescription = $(event.target).val();
+		if(trySelectScenarioByDescription(scenarioDescription)) {
+			$(event.target).val("");
+		}
 	});
-}
+
+	trySelectScenarioByDescription(descriptionOfSelectedScenario);
+});
 
 Bus.on('executingScenario', () => $('#neutrona-cursor').addClass('active'));
 Bus.on('scenarioExecuted', () => $('#neutrona-cursor').removeClass('active'));
