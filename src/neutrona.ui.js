@@ -68,30 +68,47 @@ const initializeNeutronaPanel = function() {
 
 initializeNeutronaPanel();
 
-const addStep = function(step) {
-	const listItemElQ = $(`<li id="${step.id}" title="Execute until and including this step" class="step">${step.description}</li>`);
-	const playButtonElQ = $('<i class="icon-play4"></i>');
-	listItemElQ.prepend(playButtonElQ);
+const setScenario = (scenario) => {
+	const resetScenarioUI = () => {
+		$('.neutrona-contents .scenario').empty();
+		$('.neutrona-contents .steps').empty();
+	};
 
-	$('.neutrona-contents .steps').append(listItemElQ);
-};
+	const setupScenario = () => {
+		$('.neutrona-contents .scenario')
+			.text(scenario.description)
+			.prepend('<i class="icon-play4"></i>')
+			.attr('title', "Execute all steps in the scenario")
+			.on('click', () => Runner.runScenario(scenario, 0.2))
+		;
+	};
 
-const addScenario = (scenario) => {
-	$('.neutrona-contents .scenario')
-		.text(scenario.description)
-		.prepend('<i class="icon-play4"></i>')
-		.attr('title', "Execute all steps in the scenario")
-		.on('click', () => Runner.runScenario(scenario, 0.2))
-		// .on('click', () => Neutrona.runScenario(scenario, 2))
-		// .on('click', () => {AWF.Bus.resetAWF();$('.step').click()})
-		// .on('click', () => {$('.step').click()})
-	;
+	const addStep = function(step) {
+		const listItemElQ = $(`<li id="${step.id}" title="Execute until and including this step" class="step">${step.description}</li>`);
+		const playButtonElQ = $('<i class="icon-play4"></i>');
+		listItemElQ.prepend(playButtonElQ);
 
+		$('.neutrona-contents .steps').append(listItemElQ);
+	};
 
+	resetScenarioUI();
+	setupScenario();
 	scenario.steps.forEach(addStep);
 };
 
-Bus.on('scenariosChanged', (_, scenarios) => addScenario(scenarios[0]));
+const descriptionOfScenarioToRun = $.uriParams('name');
+if(descriptionOfScenarioToRun) {
+	let allScenarios = [];
+	Bus.on('scenariosChanged', (_, scenarios) => {
+		allScenarios = scenarios;
+	});
+
+	$(window).ready(() => {
+		const scenario = allScenarios.find((scenario) => scenario.description === descriptionOfScenarioToRun);
+		setScenario(scenario);
+	});
+}
+
 Bus.on('executingScenario', () => $('#neutrona-cursor').addClass('active'));
 Bus.on('scenarioExecuted', () => $('#neutrona-cursor').removeClass('active'));
 Bus.on('click', () => {
