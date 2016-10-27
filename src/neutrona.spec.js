@@ -1,3 +1,4 @@
+const $ = require('./../lib/jquery.js');
 const runner = require('./neutrona.runner.js');
 const genUUID = require('node-uuid').v4;
 
@@ -10,9 +11,10 @@ class Step {
 }
 
 class Scenario {
-	constructor(description) {
+	constructor(description, options) {
 		this.id = genUUID();
 		this.description = description;
+		this.options = options || {};
 		this.steps = [];
 	}
 }
@@ -21,8 +23,13 @@ const scenarios = [];
 let currentScenario;
 
 const Spec = {
-	scenario(description, callback) {
-		const scenario = currentScenario = new Scenario(description);
+	scenario(description, options, callback) {
+		if($.isFunction(options)) {
+			callback = options;
+			options = undefined;
+		}
+
+		const scenario = currentScenario = new Scenario(description, options);
 		scenarios.push(currentScenario);
 		callback();
 		currentScenario = undefined;
