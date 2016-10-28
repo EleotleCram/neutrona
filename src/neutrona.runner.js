@@ -11,7 +11,7 @@ const Runner = {
 		;
 	},
 	runScenario(scenario, stepDelay) {
-		console.error("Death to all ghosts!");
+		console.error("Death to all ghosts;)");
 
 		if(typeof scenario === "string") {
 			const scenarioDescription = scenario;
