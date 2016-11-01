@@ -76,8 +76,8 @@ initializeNeutronaPanel();
 
 const setScenario = (scenario) => {
 	const resetScenarioUI = () => {
-		$('.neutrona-contents .scenario').empty();
-		$('.neutrona-contents .steps').empty();
+		$('.neutrona-contents .scenario').off().empty();
+		$('.neutrona-contents .steps').off().empty();
 	};
 
 	const setupScenario = () => {
