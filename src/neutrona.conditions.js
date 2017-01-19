@@ -10,7 +10,13 @@ const awaitCondition = (description, checkCondition, selector) => {
 				const result = $(selector);
 
 				if(checkCondition(result)) {
-					resolve(result);
+					setTimeout(() => {
+						if($(selector)[0] === result[0]){
+							resolve(result);
+						} else {
+							window.setTimeout(tryToResolve, 200);
+						}
+					}, 500);
 				} else if((Date.now() - t0) < MAX_TIMEOUT) {
 					window.setTimeout(tryToResolve, 200);
 				} else {
